@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import {API, Routes} from '../config.js';
 
 const SignupPage = () => {
     const navigate = useNavigate();
@@ -13,11 +14,11 @@ const SignupPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        axios.post('http://localhost:5566/api/users/signup', { username, email, password })
+        axios.post(API.SIGN_UP, {username, email, password})
             .then(response => {
                 setLoading(false);
                 setError(null);
-                navigate('/');
+                navigate(Routes.LOGIN);
             })
             .catch(error => {
                 if (error.response && error.response.status === 400) {
@@ -65,7 +66,8 @@ const SignupPage = () => {
                         />
                     </div>
                     {error && <div className="text-red-500 text-center mb-4">{error}</div>}
-                    <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600" disabled={loading}>
+                    <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+                            disabled={loading}>
                         {loading ? 'Signing up...' : 'Sign Up'}
                     </button>
                 </form>

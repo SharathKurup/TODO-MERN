@@ -34,7 +34,7 @@ const LoginPage = () => {
         });
     }
     const handleSignup = () => {
-        navigate('/signup');
+        navigate(Routes.SIGNUP);
     }
     return (
         <div className="flex items-center justify-center min-h-screen bg-blue-100">
