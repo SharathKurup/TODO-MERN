@@ -1,7 +1,6 @@
 import LoginPage from "./pages/LoginPage.jsx";
 import TaskList from "./components/TaskList.jsx";
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import react from "react";
+import {Routes, Route} from 'react-router-dom';
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import {AuthProvider} from "./contexts/AuthContext.jsx";
 import Logout from "./pages/Logout.jsx";

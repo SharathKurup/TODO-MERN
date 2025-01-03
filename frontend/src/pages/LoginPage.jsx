@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {AuthContext} from '../contexts/AuthContext';
 import {API, Routes} from '../config';
@@ -9,14 +9,12 @@ const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const [token, setToken] = useState(null);
     const [error, setError] = useState(null);
     const {login} = useContext(AuthContext);
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
         axios.post(API.LOGIN_URL, {username, password}).then(response => {
-            setToken(response.data.token);
             login(response.data.token);
             setLoading(false);
             setError(null);

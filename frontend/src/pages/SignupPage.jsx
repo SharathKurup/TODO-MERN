@@ -15,7 +15,7 @@ const SignupPage = () => {
         e.preventDefault();
         setLoading(true);
         axios.post(API.SIGN_UP, {username, email, password})
-            .then(response => {
+            .then(() => {
                 setLoading(false);
                 setError(null);
                 navigate(Routes.LOGIN);
