@@ -1,5 +1,5 @@
 import LoginPage from "./pages/LoginPage.jsx";
-import TaskList from "./components/TaskList.jsx";
+import TaskListPage from "./pages/TaskListPage.jsx";
 import {Routes, Route} from 'react-router-dom';
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import {AuthProvider} from "./contexts/AuthContext.jsx";
@@ -14,7 +14,7 @@ const App = () => {
             {/*<Router>*/}
             <Routes>
                 <Route path={Route_Path.LOGIN} element={<LoginPage/>}/>
-                <Route path={Route_Path.TASK_LIST} element={<PrivateRoute><TaskList/></PrivateRoute>}/>
+                <Route path={Route_Path.TASK_LIST} element={<PrivateRoute><TaskListPage/></PrivateRoute>}/>
                 <Route path={Route_Path.LOGOUT} element={<Logout/>}/>
                 <Route path={Route_Path.SIGNUP} element={<SignupPage/>}/>
                 <Route path={Route_Path.DASHBOARD} element={<PrivateRoute><DashboardPage/></PrivateRoute>}/>

@@ -1,70 +1,65 @@
-import React, { useContext, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import useAuth from '../hooks/useAuth';
+import {API} from "../config.js";
+import axios from "axios";
+import SkeletonDashboard from "../components/skeletons/SkeletonDashboard.jsx";
+import Header from '../components/Header';
+import RecentActivity from "../components/RecentActivity.jsx";
+import QuickLinks from "../components/QuickLinks.jsx";
+import PieChart from "../components/PieChart.jsx";
+import TaskStatistics from "../components/TaskStatistics.jsx";
 
 const DashboardPage = () => {
-    const {user} = useAuth();
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const {token, user} = useAuth();
+    const [loading, setLoading] = useState(true);
+    const [summary, setSummary] = useState(null);
 
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-    };
+    // const formatEditedDateTime = (date) => {
+    //     const now = new Date();
+    //     const updatedAt = new Date(date);
+    //     const diff = Math.abs(now - updatedAt);
+    //     const minutes = Math.floor(diff / (1000 * 60));
+    //     const hours = Math.floor(minutes / 60);
+    //     const days = Math.floor(hours / 24);
+    //
+    //     if (days > 0) {
+    //         return `${days} day${days > 1 ? 's' : ''} ago`;
+    //     } else if (hours > 0) {
+    //         return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    //     } else {
+    //         return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    //     }
+    // };
+
+    useEffect(() => {
+        setLoading(true);
+        // setTimeout(() => {
+            axios.get(API.SUMMARY, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(response => {
+                setSummary(response.data);
+                setLoading(false);
+            }).catch(error => {
+                console.error('An error occurred:', error);
+                setLoading(false);
+            });
+        // }, 2000);
+    }, [token]);
+
+    if (loading) {
+        return <SkeletonDashboard/>;
+    }
 
     return (
         <div className="min-h-screen bg-blue-100">
-            <header className="bg-blue-600 text-white p-4 flex justify-between items-center">
-                <div className="text-xl font-bold">
-                    ToDo App
-                </div>
-                <div className="flex items-center">
-                    <span className="mr-4">Hello, {user?.username || 'User'}!</span>
-                    <div className="relative">
-                        <button onClick={toggleDropdown} className="focus:outline-none">Profile</button>
-                        {isDropdownOpen && (
-                            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
-                                <a href="/settings" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
-                                <a href="/logout" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </header>
+            <Header user={user}/>
             <main className="p-4">
-                <section className="mb-4">
-                    <div className="bg-white p-4 rounded-lg shadow-md">
-                        <h2 className="text-xl font-bold mb-2">Task Statistics</h2>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="bg-blue-200 p-4 rounded-lg">Total Tasks: 10</div>
-                            <div className="bg-blue-200 p-4 rounded-lg">Completed: 6</div>
-                            <div className="bg-blue-200 p-4 rounded-lg">Pending: 4</div>
-                            <div className="bg-blue-200 p-4 rounded-lg">Overdue: 0</div>
-                        </div>
-                    </div>
-                </section>
-                <section className="mb-4">
-                    <div className="bg-white p-4 rounded-lg shadow-md">
-                        <h2 className="text-xl font-bold mb-2">Recent Activity</h2>
-                        <ul>
-                            <li>Task 1: Edited 2 hrs ago</li>
-                            <li>Task 2: Marked as completed</li>
-                        </ul>
-                    </div>
-                </section>
-                <section className="mb-4">
-                    <div className="bg-white p-4 rounded-lg shadow-md">
-                        <h2 className="text-xl font-bold mb-2">Quick Links</h2>
-                        <div className="flex space-x-4">
-                            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">View All Tasks</button>
-                            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">Add New Task</button>
-                            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">Manage Profile</button>
-                        </div>
-                    </div>
-                </section>
-                <section className="mb-4">
-                    <div className="bg-white p-4 rounded-lg shadow-md">
-                        <h2 className="text-xl font-bold mb-2">Task Status Distribution</h2>
-                        <div className="bg-blue-200 p-4 rounded-lg">Pie Chart Placeholder</div>
-                    </div>
-                </section>
+                <TaskStatistics summary={summary}/>
+                <RecentActivity latestTasks={summary.latestTasks}/>
+                <QuickLinks/>
+                <PieChart/>
             </main>
         </div>
     );

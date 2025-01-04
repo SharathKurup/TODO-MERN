@@ -18,7 +18,6 @@ const LoginPage = () => {
             login(response.data.token);
             setLoading(false);
             setError(null);
-            //navigate('/task/list');
             navigate(Routes.DASHBOARD);
         }).catch(error => {
             if (error.response && error.response.status === 401) {
