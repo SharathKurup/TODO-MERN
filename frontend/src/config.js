@@ -1,5 +1,5 @@
-//const BASE_URL = "http://localhost:5566";
-const BASE_URL="https://todo-mern-o3aa.onrender.com";
+const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
+
 export const API = {
     LOGIN_URL: `${BASE_URL}/login`,
     SIGN_UP: `${BASE_URL}/api/users/signup`,
