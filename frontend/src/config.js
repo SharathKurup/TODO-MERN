@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:5566";
+//const BASE_URL = "http://localhost:5566";
+const BASE_URL="https://todo-mern-o3aa.onrender.com";
 export const API = {
     LOGIN_URL: `${BASE_URL}/login`,
     SIGN_UP: `${BASE_URL}/api/users/signup`,
