@@ -1,0 +1,8 @@
+/* src/styles.css or src/assets/styles.css */
+.status-indicator.pending {
+    color: yellow;
+}
+
+.status-indicator.completed {
+    color: green;
+}
