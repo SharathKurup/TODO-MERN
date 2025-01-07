@@ -37,14 +37,6 @@ const RecentActivity = ({latestTasks}) => {
                             <div>
                                 <p className="text-lg font-semibold text-gray-800">{task.title}</p>
                                 <p className="text-sm text-gray-600">{task.status === 'completed' ? 'Marked as completed' : 'Edited'} {formatEditedDateTime(task.updatedAt)}</p>
-                                {/*<p className="text-lg font-semibold text-gray-800">{task.title}</p>*/}
-                                {/*<p className="text-sm text-gray-600">&nbsp;&nbsp;&nbsp;{task.status === 'completed' ? 'Marked as completed' : 'Edited'} {formatEditedDateTime(task.updatedAt)}</p>*/}
-                                {/*<p>*/}
-                                {/*    <span*/}
-                                {/*        className="text-lg font-semibold text-gray-800">{task.title}</span>&nbsp;-&nbsp;*/}
-                                {/*    <span*/}
-                                {/*        className="text-sm text-gray-600">{task.status === 'completed' ? 'Marked as completed' : 'Edited'} {formatEditedDateTime(task.updatedAt)}</span>*/}
-                                {/*</p>*/}
                             </div>
                         </li>
                     ))}

@@ -1,5 +1,5 @@
 import express from 'express';
-import {PORT, DB_URL,JWT_SECRET} from './config.js';
+import {PORT, DB_URL, JWT_SECRET, NODE_ENV} from './config.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import userRoute from './routes/userRoute.js';
@@ -19,16 +19,16 @@ app.get('/health', (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+    const {username, password} = req.body;
     try {
-        const user = await User.findOne({ username });
+        const user = await User.findOne({username});
         if (!user || !(await bcrypt.compare(password, user.password))) {
             return res.status(401).send("Invalid credentials");
         }
-        const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
-        res.status(200).send({ token });
+        const token = jwt.sign({id: user._id, username: user.username}, JWT_SECRET, {expiresIn: '1h'});
+        res.status(200).send({token});
     } catch (error) {
-        res.status(500).send({ message: error.message });
+        res.status(500).send({message: error.message});
     }
 });
 
@@ -36,7 +36,10 @@ mongoose.connect(DB_URL)
     .then(() => {
         console.log('Connected to MongoDB');
         app.listen(PORT, () => {
-            console.log(`Server is running on http://localhost:${PORT}`);
+            if (NODE_ENV === 'development')
+                console.log(`Server is running on http://localhost:${PORT}`);
+            else
+                console.log(`Server is up and running.`);
         });
     }).catch(error => console.log(error));
 

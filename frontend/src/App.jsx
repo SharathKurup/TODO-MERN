@@ -6,7 +6,9 @@ import {AuthProvider} from "./contexts/AuthContext.jsx";
 import Logout from "./pages/Logout.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
+import TaskPage from "./pages/TaskPage.jsx";
 import {Routes as Route_Path} from "./config.js";
+import './assets/styles.css'
 
 const App = () => {
     return (
@@ -18,6 +20,8 @@ const App = () => {
                 <Route path={Route_Path.LOGOUT} element={<Logout/>}/>
                 <Route path={Route_Path.SIGNUP} element={<SignupPage/>}/>
                 <Route path={Route_Path.DASHBOARD} element={<PrivateRoute><DashboardPage/></PrivateRoute>}/>
+                <Route path={Route_Path.TASK_CREATE} element={<PrivateRoute><TaskPage/></PrivateRoute>}/>
+                <Route path={Route_Path.TASK_EDIT} element={<PrivateRoute><TaskPage/></PrivateRoute>}/>
             </Routes>
             {/*</Router>*/}
         </AuthProvider>

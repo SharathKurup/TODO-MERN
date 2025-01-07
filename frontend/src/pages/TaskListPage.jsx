@@ -14,9 +14,9 @@ const TaskListPage = () => {
     useEffect(() => {
         setLoading(true);
         axios.get(API.TASKS, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
         }).then(response => {
             setTasks(response.data);
             setLoading(false);

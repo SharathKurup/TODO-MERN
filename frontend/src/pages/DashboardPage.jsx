@@ -14,23 +14,6 @@ const DashboardPage = () => {
     const [loading, setLoading] = useState(true);
     const [summary, setSummary] = useState(null);
 
-    // const formatEditedDateTime = (date) => {
-    //     const now = new Date();
-    //     const updatedAt = new Date(date);
-    //     const diff = Math.abs(now - updatedAt);
-    //     const minutes = Math.floor(diff / (1000 * 60));
-    //     const hours = Math.floor(minutes / 60);
-    //     const days = Math.floor(hours / 24);
-    //
-    //     if (days > 0) {
-    //         return `${days} day${days > 1 ? 's' : ''} ago`;
-    //     } else if (hours > 0) {
-    //         return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-    //     } else {
-    //         return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
-    //     }
-    // };
-
     useEffect(() => {
         setLoading(true);
         // setTimeout(() => {

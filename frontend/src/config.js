@@ -5,6 +5,7 @@ export const API = {
     SIGN_UP: `${BASE_URL}/api/users/signup`,
     SUMMARY: `${BASE_URL}/api/tasks/summary`,
     TASKS: `${BASE_URL}/api/tasks`,
+    USERS: `${BASE_URL}/api/users`,
 };
 
 export const Routes = {
@@ -13,6 +14,6 @@ export const Routes = {
     SIGNUP: '/signup',
     DASHBOARD: '/dashboard',
     TASK_LIST: '/tasks',
-    TASK_CREATE: '/task/create',
-    TASK_EDIT: '/task/edit/:id'
+    TASK_CREATE: '/tasks/create',
+    TASK_EDIT: '/tasks/edit/:id'
 };
